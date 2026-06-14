@@ -58,7 +58,7 @@ class SlipScene {
         this.addLights();
         this.addGround();
 
-        this.particleSystem = new MoldParticleSystem(this.scene);
+        this.particleSystem = new InstancedMoldParticles(this.scene);
 
         this.setupEventListeners();
     }
@@ -150,7 +150,7 @@ class SlipScene {
             this.slipColors[i * 3 + 2] = color.b;
 
             if (status && status.mold_concentration > 20 && this.showMold) {
-                this.particleSystem.createParticleSystem(
+                this.particleSystem.addSlipParticles(
                     slip.slip_id,
                     { x: slip.position_x, y: slip.position_y, z: slip.position_z },
                     status.mold_concentration
@@ -198,17 +198,21 @@ class SlipScene {
             this.slipColors[i * 3 + 2] = color.b;
 
             if (status && status.mold_concentration > 20) {
-                if (this.particleSystem.particleSystems.has(slip.slip_id)) {
-                    this.particleSystem.updateParticleSystem(slip.slip_id, status.mold_concentration);
+                if (this.particleSystem.slipMap.has(slip.slip_id)) {
+                    this.particleSystem.updateSlipParticles(
+                        slip.slip_id,
+                        { x: slip.position_x, y: slip.position_y, z: slip.position_z },
+                        status.mold_concentration
+                    );
                 } else if (this.showMold) {
-                    this.particleSystem.createParticleSystem(
+                    this.particleSystem.addSlipParticles(
                         slip.slip_id,
                         { x: slip.position_x, y: slip.position_y, z: slip.position_z },
                         status.mold_concentration
                     );
                 }
             } else {
-                this.particleSystem.removeParticleSystem(slip.slip_id);
+                this.particleSystem.removeSlipParticles(slip.slip_id);
             }
         });
 
