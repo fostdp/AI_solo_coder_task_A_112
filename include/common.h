@@ -61,9 +61,12 @@ struct MoldPrediction {
     uint64_t timestamp;
     uint32_t slip_id;
     float current_concentration;
+    float growth_rate;
     float predicted_1d;
     float predicted_3d;
     float predicted_7d;
+    float predicted_30d;
+    float predicted_90d;
     uint8_t risk_level;
 };
 
