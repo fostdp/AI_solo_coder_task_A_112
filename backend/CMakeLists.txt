@@ -1,5 +1,5 @@
 set(BACKEND_SOURCES
-    src/main.cpp
+    src/main_v2.cpp
     src/fading_model.cpp
     src/mold_model.cpp
     src/clickhouse_client.cpp
@@ -7,8 +7,11 @@ set(BACKEND_SOURCES
     src/notification.cpp
     src/opcua_client.cpp
     src/http_server.cpp
-    src/opcua/session_pool.cpp
-    src/ml/response_surface.cpp
+    src/modules/opcua_ingest.cpp
+    src/modules/fading_predictor.cpp
+    src/modules/mold_engine.cpp
+    src/modules/alert_broker.cpp
+    src/modules/config_loader.cpp
 )
 
 add_executable(haihunhou_server ${BACKEND_SOURCES})
