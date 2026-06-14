@@ -7,6 +7,8 @@ set(BACKEND_SOURCES
     src/notification.cpp
     src/opcua_client.cpp
     src/http_server.cpp
+    src/opcua/session_pool.cpp
+    src/ml/response_surface.cpp
 )
 
 add_executable(haihunhou_server ${BACKEND_SOURCES})
